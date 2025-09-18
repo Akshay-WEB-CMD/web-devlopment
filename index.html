@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Akshay Gowda Portfolio</title></marquee>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #222;
+      color: #eee;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      transition: background-color 0.3s, color 0.3s;
+      min-height: 100vh;
+      padding-bottom: 100px; /* for back to top button space */
+    }
+
+    header {
+      background-color: #111;
+      padding: 2rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    /* Typewriter effect */
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    h1.typewriter {
+      overflow: hidden;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      width: 0;
+      margin-bottom: 0.5rem;
+      font-size: 2.8rem;
+      font-weight: 700;
+      animation: typewriter 3s steps(20) forwards, blink 0.7s step-end infinite;
+    }
+
+    nav ul.nav-links {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    nav ul.nav-links li a {
+      color: #eee;
+      text-decoration: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    nav ul.nav-links li a:hover,
+    nav ul.nav-links li a:focus {
+      background-color: #FFD700;
+      color: #222;
+      outline: none;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #FFD700;
+      text-shadow: 0 0 6px #FFD700;
+    }
+
+    /* Skills Progress Bars */
+    .skill-bar {
+      margin: 1rem 0;
+      max-width: 400px;
+      font-weight: 600;
+      color: #eee;
+    }
+
+    .skill-bar span {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+
+    .progress-container {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 25px;
+      height: 22px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .progress {
+      background: #FFD700;
+      height: 100%;
+      width: 0;
+      border-radius: 25px 0 0 25px;
+      transition: width 1.5s ease-in-out;
+      box-shadow: 0 0 8px #FFD700;
+    }
+
+    /* Contact form */
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      margin-top: 0.3rem;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+      outline: 3px solid #FFD700;
+      background-color: #333;
+      color: #fff;
+    }
+
+    button[type="submit"] {
+      margin-top: 1.5rem;
+      padding: 0.8rem;
+      font-weight: 600;
+      background-color: #FFD700;
+      color: #222;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      background-color: #FFC300;
+      outline: none;
+    }
+
+    #formMessage {
+      margin-top: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Back to top button */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #FFD700;
+      border: none;
+      padding: 0.8rem 1rem;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
+      transition: background-color 0.3s ease;
+      z-index: 1001;
+      user-select: none;
+    }
+
+    #backToTop:hover,
+    #backToTop:focus {
+      background-color: #FFC300;
+      outline: none;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #ddd;
+    }
+
+    body.dark-mode header {
+      background-color: #1c1c1c;
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+    }
+
+    body.dark-mode nav ul.nav-links li a:hover,
+    body.dark-mode nav ul.nav-links li a:focus {
+      background-color: #FFA500;
+      color: #222;
+    }
+
+    body.dark-mode .progress-container {
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 2px 5px rgba(255, 215, 0, 0.3);
+    }
+
+    body.dark-mode .progress {
+      background: #FFA500;
+      box-shadow: 0 0 8px #FFA500;
+    }
+
+    /* Dark mode toggle button */
+    #darkModeToggle {
+      position: fixed;
+      bottom: 90px;
+      right: 30px;
+      background: #444;
+      color: #FFD700;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+      transition: background-color 0.3s;
+    }
+
+    #darkModeToggle:hover,
+    #darkModeToggle:focus {
+      background-color: #666;
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      nav ul.nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .skill-bar {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="typewriter" tabindex="0">AKSHAY GOWDA</h1>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links">
+        <li><a href="#about" tabindex="0">About Me</a></li>
+        <li><a href="#skills" tabindex="0">Skills</a></li>
+        <li><a href="#projects" tabindex="0">Projects</a></li>
+        <li><a href="#contact" tabindex="0">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" tabindex="-1" aria-label="About Me section">
+      <h2 class="section-title">About Me</h2>
+      <marquee><p>Hello! I'm Akshay, a passionate web developer with expertise in creating beautiful and functional websites. I love turning ideas into reality using code.</p>
+    </marquee>
+    </section>
+
+    <section id="skills" tabindex="-1" aria-label="Skills section">
+      <h2 class="section-title">Skills</h2>
+
+      <div class="skill-bar" aria-label="HTML skill level 90%">
+        <span>HTML</span>
+        <div class="progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90">
+          <div class="progress" style="--width:90%; width: 90%;"></div>
+        </div>
+      </div>
+
+      <div class="skill-bar" aria-label="CSS skill level 85%">
+        <span>CSS</span>
+        <div class="progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85">
+          <div class="progress" style="--width:85%; width: 85%;"></div>
+        </div>
+      </div>
+
+      <div class="skill-bar" aria-label="JavaScript skill level 80%">
+        <span>JavaScript</span>
+        <div class="progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+          <div class="progress" style="--width:80%; width: 80%;"></div>
+        </div>
+      </div>
+
+      <div class="skill-bar" aria-label="React skill level 75%">
+        <span>React</span>
+        <div class="progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75">
+          <div class="progress" style="--width:75%; width: 75%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" tabindex="-1" aria-label="Projects section">
+      <h2 class="section-title">Projects</h2>
+      <p>Coming soon...</p>
+    </section>
+
+    <section id="contact" tabindex="-1" aria-label="Contact section">
+      <h2 class="section-title">Contact Me</h2>
+      <form id="contactForm" novalidate>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required aria-required="true" aria-describedby="nameHelp" />
+        
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required aria-required="true" aria-describedby="emailHelp" />
+        
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="messageHelp"></textarea>
+        
+        <button type="submit">Send</button>
+        <p id="formMessage" role="alert" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav ul.nav-links a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetID = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetID);
+        if (target) {
+          target.focus({ preventScroll: true }); // For accessibility
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Animate skill bars on page load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.skill-bar .progress').forEach(progress => {
+        const width = progress.style.width;
+        progress.style.width = '0';
+        setTimeout(() => {
+          progress.style.width = width;
+        }, 500);
+      });
+    });
+
+    // Contact form validation and submission (fake)
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+
+      if (!name || !email || !message) {
+        formMessage.textContent = 'Please fill out all fields.';
+        formMessage.style.color = 'red';
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        formMessage.textContent = 'Please enter a valid email address.';
+        formMessage.style.color = 'red';
+        return;
+      }
+
+      formMessage.textContent = 'Thank you for reaching out! I will get back to you soon.';
+      formMessage.style.color = 'limegreen';
+      form.reset();
+    });
+
+    // Back to top button functionality
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Dark mode toggle and save preference
+    const darkModeToggle = document.getElementById('darkModeToggle');
+
+    function setDarkMode(enabled) {
+      if (enabled) {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☀️';
+        localStorage.setItem('darkMode', 'true');
+      } else {
+        document.body.classList.remove('dark-mode');
+        darkModeToggle.textContent = '🌙';
+        localStorage.setItem('darkMode', 'false');
+      }
+    }
+
+    // Check saved preference or system preference on load
+    window.addEventListener('load', () => {
+      const savedMode = localStorage.getItem('darkMode');
+      if (savedMode === 'true') {
+        setDarkMode(true);
+      } else if (savedMode === 'false') {
+        setDarkMode(false);
+      } else {
+        // No saved preference, check system
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setDarkMode(prefersDark);
+      }
+    });
+
+    darkModeToggle.addEventListener('click', () => {
+      const enabled = document.body.classList.contains('dark-mode');
+      setDarkMode(!enabled);
+    });
+  </script>
+</body>
+</html>
